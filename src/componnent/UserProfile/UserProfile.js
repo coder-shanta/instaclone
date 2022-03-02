@@ -22,7 +22,7 @@ const UserProfile = () => {
 
 	const loadPosts = async () => {
 		try {
-			const { data } = await Axios.get('/assets/feed');
+			const { data } = await Axios.get('/assets/own');
 
 			setPosts(data.data);
 			setLoading(false);
@@ -97,7 +97,7 @@ const UserProfile = () => {
 								marginLeft: 60,
 							}}
 						>
-							37 Post
+							37 NFTs
 						</h2>
 						<h2
 							style={{
@@ -126,7 +126,7 @@ const UserProfile = () => {
 			</Box>
 
 			<Box>
-				<h2 style={{ fontSize: 20, fontWeight: 600 }}>Post</h2>
+				<h2 style={{ fontSize: 20, fontWeight: 600 }}>NFTs</h2>
 				<Grid container spacing={2}>
 					{posts.length === 0 && !isLoading ? (
 						<div>
