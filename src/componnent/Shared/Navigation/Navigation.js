@@ -19,8 +19,8 @@ import { Container } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 import './Navigation.css';
-
 import { useAuth } from '../../../contexts/AuthContext';
+import { connectWallet } from '../../../core';
 
 const Navigation = () => {
 	const { user } = useAuth();
@@ -163,6 +163,21 @@ const Navigation = () => {
 			</MenuItem>
 		</Menu>
 	);
+
+	const handleLogin = async () => {
+		if (typeof window.ethereum === 'undefined') {
+			window.open('https://metamask.io/download/');
+		} else {
+			try {
+				const user = await connectWallet();
+				localStorage.setItem('user', JSON.stringify(user));
+				window.location.href = '/';
+			} catch (error) {
+				alert(error.message);
+			}
+		}
+	};
+
 	return (
 		<Box sx={{ flexGrow: 1, mb: 10 }}>
 			<AppBar
@@ -242,7 +257,7 @@ const Navigation = () => {
 									</IconButton>
 								</>
 							) : (
-								<Button>Connect Wallet</Button>
+								<Button onClick={handleLogin}>Connect Wallet</Button>
 							)}
 						</Box>
 						<Box sx={{ display: { xs: 'flex', md: 'none' } }}>
