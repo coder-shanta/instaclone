@@ -10,6 +10,7 @@ import 'emoji-mart/css/emoji-mart.css';
 import Modal from '@mui/material/Modal';
 import AllComment from '../AllComment/AllComment';
 import { Axios } from '../../../core/axios';
+import Nft from './Nft';
 
 const SinglePersonPost = () => {
 	const [open, setOpen] = useState(false);
@@ -56,78 +57,7 @@ const SinglePersonPost = () => {
 					<h1>Nothing to display.</h1>
 				</div>
 			) : (
-				posts.map((post, idx) => (
-					<Box
-						key={idx}
-						sx={{ border: 1, borderColor: '#DBDBDB', mt: 5, mb: 5, p: 1 }}
-					>
-						<Box
-							sx={{
-								display: 'flex',
-								justifyContent: 'flex-start',
-								p: 2,
-								borderBottom: 1,
-								borderColor: '#DBDBDB',
-								mb: 2,
-							}}
-						>
-							<Avatar
-								sx={{ border: 1, borderColor: '#DBDBDB' }}
-								alt={post.author.name}
-								src={post.author.avatar}
-							/>
-							<Typography
-								sx={{ ml: 2, mt: 1, fontSize: 14, fontWeight: 600 }}
-								variant="h6"
-								component="h6"
-							>
-								{post.author.name}
-							</Typography>
-						</Box>
-						<Box xs={12} className="postImgGrid">
-							<img className="postImg" src={post.imgUrl} alt="" />
-						</Box>
-						<Box sx={{ display: 'flex' }}>
-							<FavoriteBorderIcon
-								sx={{ pl: 2, pt: 2, pr: 2, ml: 1, fontSize: 29 }}
-							></FavoriteBorderIcon>
-							<CommentIcon sx={{ pt: 2, fontSize: 29 }}></CommentIcon>
-						</Box>
-						<Box>
-							<p style={{ fontSize: 15, marginLeft: 28, fontWeight: 600 }}>
-								{post.numberOfLoves} Likes
-							</p>
-							<p
-								style={{
-									fontSize: 15,
-									marginLeft: 28,
-									fontWeight: 600,
-									color: '#989898',
-									cursor: 'pointer',
-								}}
-								onClick={handleOpen}
-							>
-								View All {post.numberOfComments} comment
-							</p>
-						</Box>
-						<AllComment open={open} handleClose={handleClose}></AllComment>
-						<Box sx={{ borderTop: 1, color: '#DBDBDB' }}>
-							<form className="reactions" action="">
-								{/* <Picker showPreview={false} showSkinTones={false} /> */}
-
-								<TextField
-									sx={{ width: '80%', p: 1 }}
-									placeholder="Please enter text"
-									variant="standard"
-									InputProps={{ disableUnderline: true }}
-								/>
-								<Button variant="text" sx={{ width: 20, ml: 2, mt: 1 }}>
-									Post
-								</Button>
-							</form>
-						</Box>
-					</Box>
-				))
+				posts.map((post, idx) => <Nft nft={post} key={idx} />)
 			)}
 		</>
 	);
