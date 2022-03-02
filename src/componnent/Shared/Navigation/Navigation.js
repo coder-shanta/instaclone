@@ -84,6 +84,14 @@ const Navigation = () => {
 		handleMobileMenuClose();
 	};
 
+	const handleLogout = () => {
+		setAnchorEl(null);
+		handleMobileMenuClose();
+
+		localStorage.removeItem('user');
+		window.location.href = '/';
+	};
+
 	const handleMobileMenuOpen = (event) => {
 		setMobileMoreAnchorEl(event.currentTarget);
 	};
@@ -108,7 +116,7 @@ const Navigation = () => {
 			<Link to="/profile" style={{ textDecoration: 'none', color: '#212121' }}>
 				<MenuItem onClick={handleMenuClose}>Profile</MenuItem>
 			</Link>
-			<MenuItem onClick={handleMenuClose}>My account</MenuItem>
+			<MenuItem onClick={handleLogout}>Log-out</MenuItem>
 		</Menu>
 	);
 
@@ -129,7 +137,7 @@ const Navigation = () => {
 			open={isMobileMenuOpen}
 			onClose={handleMobileMenuClose}
 		>
-			<MenuItem>
+			{/* <MenuItem>
 				<IconButton size="large" aria-label="show 4 new mails" color="inherit">
 					<Badge badgeContent={4} color="error">
 						<MailIcon />
@@ -148,7 +156,7 @@ const Navigation = () => {
 					</Badge>
 				</IconButton>
 				<p>Notifications</p>
-			</MenuItem>
+			</MenuItem> */}
 			<MenuItem onClick={handleProfileMenuOpen}>
 				<IconButton
 					size="large"
@@ -226,7 +234,7 @@ const Navigation = () => {
 
 							{user ? (
 								<>
-									<IconButton
+									{/* <IconButton
 										size="large"
 										aria-label="show 4 new mails"
 										color="inherit"
@@ -243,7 +251,8 @@ const Navigation = () => {
 										<Badge badgeContent={17} color="error">
 											<NotificationsIcon />
 										</Badge>
-									</IconButton>
+									</IconButton> */}
+
 									<IconButton
 										size="large"
 										edge="end"
